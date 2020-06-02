@@ -32,16 +32,22 @@
     [1, 5, 2, 6, 3, 7, 4]를 4번째부터 4번째까지 자른 후 정렬합니다. [6]의 첫 번째 숫자는 6입니다.
     [1, 5, 2, 6, 3, 7, 4]를 1번째부터 7번째까지 자릅니다. [1, 2, 3, 4, 5, 6, 7]의 세 번째 숫자는 3입니다. -->
 
+
+    <div>입력 : solution([1, 5, 2, 6, 3, 7, 4], [[2, 5, 3], [4, 4, 1], [1, 7, 3]]);</div>
+    <span>출력 결과 :</span>
+    <p style="margin:0;display:inline"></p>
     <script>
+    //예제 테스트
+            solution([1, 5, 2, 6, 3, 7, 4], [[2, 5, 3], [4, 4, 1], [1, 7, 3]]);
         function solution(array, commands) {
         var answer = [];
         let arr = [];
         for(let i = 0; i < commands.length; i++){
             arr.push(array.slice(commands[i][0]-1, commands[i][1]).sort(function(a,b){return a-b;}));
             answer[i] = arr[i][commands[i][2]-1];
+            }
+        document.querySelector("p").innerHTML = "[" + answer + "]";
         }
-        return answer;
-    }
     </script>
 </body>
 </html>
