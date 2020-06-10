@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>가운데 글자 가져오기</title>
+</head>
+<body>
+<h2>자바스크립트 코딩 테스트 - "가운데 글자 가져오기" </h2>
+<pre style="width: 800px; box-sizing: border-box; border:1px solid #666;background:#f8f6ff;padding:10px;">
+**문제 설명
+단어 s의 가운데 글자를 반환하는 함수, solution을 만들어 보세요.
+단어의 길이가 짝수라면 가운데 두글자를 반환하면 됩니다.
+
+**제한 조건
+s는 길이가 1 이상, 100이하인 스트링입니다.
+
+**입출력 예
+s	return
+"abcde"	"c"
+"qwer"	"we"
+</pre>
+
+    <div>입력 : solution("abcde");</div>
+    <span>출력 결과 :</span>
+    <p style="margin:0;display:inline"></p>
+    <script>
+    //예제 테스트
+    solution("abcde");
+
+    //답안
+    function solution(s){
+        let answer ="";
+        let half = s.length / 2;
+        console.log(half);
+        if(s.length%2 == 0){
+            answer = s.slice(half-1, half);
+        }else if(s.length%2 == 1){
+            answer = s.slice(half, half+1);
+        }
+        document.querySelector("p").innerHTML = answer;
+    }
+    </script>
+</body>
+</html>
