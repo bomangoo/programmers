@@ -10,6 +10,7 @@
 <h2>자바스크립트 코딩 테스트 - "자연수 뒤집어 배열로 만들기" </h2>
 <pre style="width: 800px; box-sizing: border-box; border:1px solid #666;background:#f8f6ff;padding:10px;">
 **문제 설명
+<<<<<<< HEAD
 자연수 n을 뒤집어 각 자리 숫자를 원소로 가지는 배열 형태로 리턴해주세요. 예를들어 n이 12345이면 [5,4,3,2,1]을 리턴합니다.
 
 **제한 조건
@@ -18,6 +19,25 @@ n은 10,000,000,000이하인 자연수입니다.
 **입출력 예
 n	return
 12345	[5,4,3,2,1]
+=======
+자연수 N이 주어지면, N의 각 자릿수의 합을 구해서 return 하는 solution 함수를 만들어 주세요.
+예를들어 N = 123이면 1 + 2 + 3 = 6을 return 하면 됩니다.
+
+**제한 조건
+N의 범위 : 100,000,000 이하의 자연수
+
+**입출력 예
+N	answer
+123	6
+987	24
+
+**입출력 예 설명
+입출력 예 #1
+문제의 예시와 같습니다.
+
+입출력 예 #2
+9 + 8 + 7 = 24이므로 24를 return 하면 됩니다.
+>>>>>>> 75f97d0bf1c79906698d3f31bb069942eba0348f
 </pre>
 
     <div>입력 : solution(12345);</div>
@@ -25,12 +45,21 @@ n	return
     <p style="margin:0;display:inline"></p>
     <script>
     //예제 테스트
+<<<<<<< HEAD
     solution(12345);
 
     //답안
     function solution(n){
       let answer = [];
       answer.push((n+"").split("").map(a => parseInt(a)).reverse());
+=======
+    solution(123);
+
+    //답안
+    function solution(n){
+      let answer = 0;
+      answer = (n+"").split("").reduce((a,b) => a + parseInt(b), 0);
+>>>>>>> 75f97d0bf1c79906698d3f31bb069942eba0348f
         document.querySelector("p").innerHTML = answer;
     }
     </script>
