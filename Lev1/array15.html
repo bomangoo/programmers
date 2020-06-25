@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>핸드폰 번호 가리기</title>
+</head>
+<body>
+<h2>자바스크립트 코딩 테스트 - "핸드폰 번호 가리기" </h2>
+<pre style="width: 800px; box-sizing: border-box; border:1px solid #666;background:#f8f6ff;padding:10px;">
+**문제 설명
+프로그래머스 모바일은 개인정보 보호를 위해 고지서를 보낼 때 고객들의 전화번호의 일부를 가립니다.
+전화번호가 문자열 phone_number로 주어졌을 때,
+전화번호의 뒷 4자리를 제외한 나머지 숫자를 전부 *으로 가린 문자열을 리턴하는 함수, solution을 완성해주세요.
+
+**제한 조건
+s는 길이 4 이상, 20이하인 문자열입니다.
+
+**입출력 예
+phone_number	return
+"01033334444"	""*******4444"
+"027778888"	""*****8888"
+</pre>
+
+    <div>입력 : solution("01044901564");</div>
+    <span>출력 결과 :</span>
+    <p style="margin:0;display:inline"></p>
+    <script>
+    //예제 테스트
+    solution("01044901564");
+
+    //답안
+    function solution(s){
+      let answer = "*".repeat(s.length-4);
+      let lastnum = s.slice(s.length-4);
+      answer = answer+lastnum
+        document.querySelector("p").innerHTML = answer;
+    }
+    </script>
+</body>
+</html>
