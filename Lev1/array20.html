@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>직사각형 별찍기</title>
+</head>
+<body>
+<h2>자바스크립트 코딩 테스트 - "직사각형 별찍기" </h2>
+<pre style="width: 800px; box-sizing: border-box; border:1px solid #666;background:#f8f6ff;padding:10px;">
+**문제 설명
+이 문제에는 표준 입력으로 두 개의 정수 n과 m이 주어집니다.
+별(*) 문자를 이용해 가로의 길이가 n, 세로의 길이가 m인 직사각형 형태를 출력해보세요.
+
+**제한 조건
+n과 m은 각각 1000 이하인 자연수입니다.
+
+**입출력 예
+5 3
+*****
+*****
+*****
+</pre>
+
+    <div>입력 : solution(5, 3);</div>
+    <span>출력 결과 :</span>
+    <textarea style="width:100%;height:100px;margin:0;border:0;outline:none"></textarea>
+    <script>
+    //예제 테스트
+    solution(5, 3);
+
+    //답안
+    function solution(n, m){
+      let a = "*".repeat(n);
+      a = a + "\n";
+      let answer = a.repeat(m);
+      document.querySelector("textarea").innerHTML = answer;
+    }
+    </script>
+</body>
+</html>
