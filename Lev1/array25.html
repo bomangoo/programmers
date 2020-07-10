@@ -46,26 +46,35 @@ board	moves	result
 
     //답안
     function solution(board, moves) {
-      var answer = 0;
-      var basket = [];
-      moves.forEach(function(m){
-          for(let j = 0; j < board.length; j++){
-                if(board[j][m-1] != 0){
-                    basket.push(board[j][m-1]);
-                    board[j][m-1] = 0;
-              }else if(board[j][m-1] == 0 && j == board.length-1){
-                  basket.push(0);
-              }
-          }
-      }) //바구니에 들어갈 인형 배열 추출
-      for(let i = 0; i <basket.length; i++){
-          if(i != basket.length-1 && basket[i] == basket[i+1]){
-              delete basket[i];
-              delete basket[i+1];
-              answer++;
-          }
-      }
-
+    var answer = 0;
+    var basket = [];
+    moves.forEach(function(m){
+        let j = 0;
+        for(;;){
+            if(board[j][m-1] === 0){
+                if(j < board.length-1){j++;}
+                else if(j === board.length-1){
+                    basket.push(0);
+                    break;
+                }
+            }else if(board[j][m-1] !== 0){
+                  basket.push(board[j][m-1]);
+                  board[j][m-1] = 0;
+                    break;
+            }
+        }
+    }) //바구니에 들어갈 인형 배열 추출
+    console.log(basket);
+    for(let i = 0; i <basket.length; i++){
+        if(i != basket.length-1 && basket[i] == basket[i+1]){
+            basket.splice(i, 2);
+            answer+=2;
+            if(basket[i-1] == basket[i] || basket[i] == basket[i+1]){
+                answer+=2;
+            }
+        }
+    }
+    
       document.querySelector("p").innerHTML = answer;
       // 다른사람의 풀이 참고
       //return strings.sort((a,b) => a[n] === b[n] ? a.localeCompare(b) : a[n].localeCompare(b))
