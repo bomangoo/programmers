@@ -72,4 +72,25 @@ console.log(triangle.getArea()); // 30 * 30 / 2 => 450 출력
 console.log(rectangle instanceof Triangle);  //false
 console.log(rectangle instanceof Shape);  //true
 console.log(triangle instanceof Object);  //true
-// 
+//
+
+
+//Quiz
+function calculate(command, a, b){
+  switch(command){
+    case 'add':
+      return a+b;
+    case 'substract':
+      return a-b;
+    case 'divide':
+      return a/b;
+    case 'multiply':
+      return a*b;
+    case 'remainder':
+      return a%b;
+    default:
+      throw Error('unknown command');
+  }
+}
+
+console.log(calculate('divide', 10, 2));
