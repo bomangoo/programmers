@@ -64,18 +64,25 @@ N	stages	result
 
     //답안
     function solution(N, stages) {
-    let fail = [];
-    stages = stages.sort((a,b) => a - b);
-    for(let i = 1; i <= N; i++){
-        let sum = stages.filter(a => a <= i);
-        const s = stages.length;
-        fail.push(sum.length/s);  //실패율 계산
-        sum = stages.splice(stages.indexOf(sum[0]), sum.length);  //stages에서 클리어한 도전자 제외시키기
-        console.log(sum)
-    }
-    const failSort = fail.sort((a,b)=> a-b);
-    for(let i = 0; i < fail.length; i++){
-        let answer = [] + fail.findIndex(failSort[i])+1;
+      let fail = [];
+      let answer = [];
+      let sum;
+      stages.sort((a,b) => a - b);
+      for(let i = 1; i <= N; i++){
+          sum = stages.filter(a => a <= i);
+          fail.push(sum.length/stages.length);  //실패율 계산
+          sum = stages.splice(stages.indexOf(sum[0]), sum.length);  //stages에서 클리어한 도전자 제외시키기
+      }
+      for(let i = 0; i < fail.length; i++){
+          answer.push(fail[i]);
+      }
+      answer.sort((a, b) => b - a);
+      console.log(answer);
+      for(let j = 0; j < answer.length; j++){
+          answer[j] = fail.indexOf(answer[j]) + 1;
+          if(answer[j-1] == answer[j]){
+              answer[j] += 1;
+          }
     }
     console.log(answer);
     document.querySelector("p").innerHTML = `[${answer}]`;
