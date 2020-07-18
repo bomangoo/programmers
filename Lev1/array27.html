@@ -66,24 +66,21 @@ N	stages	result
     function solution(N, stages) {
       let fail = [];
       let answer = [];
+      let param;
       let sum;
-      stages.sort((a,b) => a - b);
+      stages.sort((a, b) => a - b);
       for(let i = 1; i <= N; i++){
           sum = stages.filter(a => a <= i);
-          fail.push(sum.length/stages.length);  //실패율 계산
+          param = {rate: sum.length/stages.length,
+                   index: i}; //실패율 계산 + 인덱스 값 저장
+          fail.push(param);
           sum = stages.splice(stages.indexOf(sum[0]), sum.length);  //stages에서 클리어한 도전자 제외시키기
       }
-      for(let i = 0; i < fail.length; i++){
+
+      for(let i = 0; i < fail.length; i++){ // fail 배열 복제
           answer.push(fail[i]);
       }
-      answer.sort((a, b) => b - a);
-      console.log(answer);
-      for(let j = 0; j < answer.length; j++){
-          answer[j] = fail.indexOf(answer[j]) + 1;
-          if(answer[j-1] == answer[j]){
-              answer[j] += 1;
-          }
-    }
+      answer = answer.sort((a, b) => (a.rate != b.rate) ? b.rate - a.rate : a.rate - b.rate).map(a => a.index); // fail 배열중 rate 값으로만 복제 내림차순 정렬
     console.log(answer);
     document.querySelector("p").innerHTML = `[${answer}]`;
 }
