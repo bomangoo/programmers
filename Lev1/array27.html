@@ -68,20 +68,19 @@ N	stages	result
     let answer;
     let param;
     let sum;
-    stages.sort((a, b) => a - b);
+    let stageNum = stages.length;
     for(let i = 1; i <= N; i++){
         sum = stages.filter(a => a == i).length;
-        if(sum == 0){  //실패율 계산 + 인덱스 값 저장
+        if(sum === 0){  //실패율 계산 + 인덱스 값 저장
             param = { rate : 0, index: i }
         }else{
-            param = { rate : sum/stages.length, index: i };
+            param = { rate : sum/stageNum, index: i };
         }
         fail.push(param);
-        //sum = stages.splice(stages.indexOf(sum[0]), sum.length);  //stages에서 클리어한 도전자 제외시키기
+        stageNum -= sum;  //stages에서 클리어한 도전자 제외시키기
     }
     console.log(fail);
-    answer = fail.sort((a, b) => a.rate > b.rate ? -1 : a.rate < b.rate ? 1 : 0);
-    answer = answer.sort((a, b) => a.index < b.index ? -1 : a.index > b.index ? 1 : 0);
+    answer = fail.sort((a, b) => a.rate > b.rate ? -1 : a.rate < b.rate ? 1 : a.index > b.index ? 1 : -1).map(a => a.index);
 
  // fail 배열중 rate 값으로만 복제 내림차순 정렬
     console.log(answer);
