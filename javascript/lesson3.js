@@ -36,49 +36,45 @@ const students = [
 ];
 
 // Q5. find a student with the score 90
-for(let i = 0; i <= students.length; i++){
-  students[i].split(',');
+let student_score = "";
+student_score = students.filter(a => a.score >= 90);
+for(let i = 0; i < student_score.length; i++){
+  student_score = student_score[i].name;
 }
-console.log(students[1]);
-let findc = []
-for(student in students){
-  score.push(student[3]);
-}
-score.filter(a => a >= 90);
-console.log(score);
+console.log(student_score);
+//엘리쌤 답안
+let student_score2 = students.find(a => a.score >= 90);
+console.log(student_score2);
 
 // Q6. make an array of enrolled students
-let enroll = [];
-for(student in students){
-  enroll.push(student[2]);
+const enrollment = students.filter(a => a.enrolled == true);
+let student_enroll = [];
+for(let i = 0; i < enrollment.length; i++){
+  student_enroll.push(enrollment[i].name);
 }
-console.log(enroll);
+console.log(student_enroll);
 
 // Q7. make an array containing only the students' scores
 // result should be: [45, 80, 90, 66, 88]
-let score = [];
-for(student in students){
-  score.push(student[3]);
-}
-console.log(score);
+let student_scores = students.map(a => a.score);
+console.log(student_scores);
 
 // Q8. check if there is a student with the score lower than 50
-let lower = []
-for(student in students){
-  lower.push(student[3]);
-}
-lower.filter(a => a >= 50);
+let lower;
+lower = students.some(a => a.score <= 50);
 console.log(lower);
 
 // Q9. compute students' average score
-let average = high.reduce((a,b) => a + b);
-average = average / high.length;
+let average = student_scores.reduce((a,b) => a+b);
+average = average / students.length;
 console.log(average);
 
 // Q10. make a string containing all the scores
 // result should be: '45, 80, 90, 66, 88'
-high.join("");
-console.log(high);
+const high_score = student_scores.join(', ');
+console.log(high_score);
 
 // Bonus! do Q10 sorted in ascending order
 // result should be: '45, 66, 80, 88, 90'
+const ascending_score = student_scores.sort().join(', ');
+console.log(ascending_score)
