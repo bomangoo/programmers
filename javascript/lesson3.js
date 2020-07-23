@@ -42,7 +42,11 @@ for(let i = 0; i < student_score.length; i++){
   student_score = student_score[i].name;
 }
 console.log(student_score);
+<<<<<<< HEAD
 //엘리쌤 답안 find() 이용해서 원하는 값 찾기
+=======
+//엘리쌤 답안
+>>>>>>> f37e5d0a093a7ca6e060475a879f4cd34f0969d5
 let student_score2 = students.find(a => a.score >= 90);
 console.log(student_score2);
 
@@ -61,7 +65,11 @@ console.log(student_scores);
 
 // Q8. check if there is a student with the score lower than 50
 let lower;
+<<<<<<< HEAD
 lower = students.some(a => a.score <= 50); //모든 조건에 부합하면 true가 나오는 every() 메서드도 있다
+=======
+lower = students.some(a => a.score <= 50);
+>>>>>>> f37e5d0a093a7ca6e060475a879f4cd34f0969d5
 console.log(lower);
 
 // Q9. compute students' average score
