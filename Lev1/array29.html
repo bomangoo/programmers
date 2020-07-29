@@ -45,24 +45,35 @@ numbers	hand	result
     //답안
     function solution(numbers, hand) {
       let answer = [];
-      let another = [];
       let right = 12;
       let left = 10;
       let arr;
-      another = numbers.map(a => a%3 === 1 ? 'L' : a%3 === 0 ? 'R' : 'X');  // L,R값 대입한 another배열 생성
+      answer = numbers.map(a => a%3 === 1 ? 'L' : a%3 === 0 ? 'R' : 'X');  // L,R값 대입한 another배열 생성
       for(let i = 0; i < numbers.length; i++){
         if(numbers[i]%3 === 2){  // 2,5,8,0 눌렀을 때
-          arr = another.slice(0, i);
+          arr = answer.slice(0, i);
           if(arr.includes('L')){
             left = arr.lastIndexOf('L');
             left = numbers[left];  // 왼쪽으로 누른 마지막 숫자
-          }else if(arr.includes('R')){
+          }
+          if(arr.includes('R')){
             right = arr.lastIndexOf('R');
             right = numbers[right];  // 오른쪽으로 누른 마지막 숫자
+             console.log(`right is ${right}`)
           }
-
-      console.log(arr.includes('L'));
-          if(i == 0 || right - left == 2){ // 오른쪽과 왼쪽의 위치가 같다면
+          if(numbers[i] == 5){ //키패드 5를 눌렀을 경우
+              if((left == 1 && right == 9) || (left == 7 && right == 3) || (left == 2 || right == 2) || (left == 8 || right == 8)){
+                  if(hand === "right"){
+                      answer[i] = 'R'
+                  }else{
+                      answer[i] = 'L'
+                  }
+              }else if(Math.abs(numbers[i] - right) < Math.abs(numbers[i] - left)){ //오른쪽 키패드가 더 가까울 때
+                answer[i] = 'R';
+              }else if(Math.abs(numbers[i] - right) > Math.abs(numbers[i] - left)){ //왼쪽 키패드가 더 가까울 때
+                answer[i] = 'L'
+              }
+          }else if((left == 1 && right == 3) || (left == 4 && right == 6) || (left == 7 && right == 9)){ // 오른쪽과 왼쪽의 위치가 같다면
             if(hand === "right"){
               answer[i] = 'R';
             }else{
@@ -73,11 +84,6 @@ numbers	hand	result
           }else if(Math.abs(numbers[i] - right) > Math.abs(numbers[i] - left)){ //왼쪽 키패드가 더 가까울 때
             answer[i] = 'L'
           }
-        }
-      }
-      for(let i = 0; i < numbers.length; i++){
-        if(answer[i] == undefined){
-         answer[i] = another[i];
         }
       }
       answer = answer.join('');
