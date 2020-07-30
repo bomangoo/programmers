@@ -43,50 +43,41 @@ numbers	hand	result
     solution([1, 3, 4, 5, 8, 2, 1, 4, 5, 9, 5],	"right");
 
     //답안
+    function pushCenter(num, hand, rightside, leftside){
+      const pos = {
+        '1':[0,0], '2':[0,1], '3':[0,2],
+        '4':[1,0], '5':[1,1], '6':[1,2],
+        '7':[2,0], '8':[2,1], '9':[2,2],
+        '*':[3,0], '0':[3,1], '#':[3,2]
+      }
+      const X = 0;
+      const Y = 1;
+      let rightdir = Math.abs(pos[num][X] - pos[rightside][X]) + Math.abs(pos[num][Y] - pos[rightside][Y]);
+      let leftdir = Math.abs(pos[num][X] - pos[leftside][X]) + Math.abs(pos[num][Y] - pos[leftside][Y]);
+      if(rightdir === leftdir){
+        return hand === 'right' ? 'R' : 'L';
+      }else {
+        return rightdir > leftdir ? 'L' : 'R';
+      }
+    }
     function solution(numbers, hand) {
       let answer = [];
-      let right = 12;
-      let left = 10;
-      let arr;
-      answer = numbers.map(a => a%3 === 1 ? 'L' : a%3 === 0 ? 'R' : 'X');  // L,R값 대입한 another배열 생성
-      for(let i = 0; i < numbers.length; i++){
-        if(numbers[i]%3 === 2){  // 2,5,8,0 눌렀을 때
-          arr = answer.slice(0, i);
-          if(arr.includes('L')){
-            left = arr.lastIndexOf('L');
-            left = numbers[left];  // 왼쪽으로 누른 마지막 숫자
-          }
-          if(arr.includes('R')){
-            right = arr.lastIndexOf('R');
-            right = numbers[right];  // 오른쪽으로 누른 마지막 숫자
-             console.log(`right is ${right}`)
-          }
-          if(numbers[i] == 5){ //키패드 5를 눌렀을 경우
-              if((left == 1 && right == 9) || (left == 7 && right == 3) || (left == 2 || right == 2) || (left == 8 || right == 8)){
-                  if(hand === "right"){
-                      answer[i] = 'R'
-                  }else{
-                      answer[i] = 'L'
-                  }
-              }else if(Math.abs(numbers[i] - right) < Math.abs(numbers[i] - left)){ //오른쪽 키패드가 더 가까울 때
-                answer[i] = 'R';
-              }else if(Math.abs(numbers[i] - right) > Math.abs(numbers[i] - left)){ //왼쪽 키패드가 더 가까울 때
-                answer[i] = 'L'
-              }
-          }else if((left == 1 && right == 3) || (left == 4 && right == 6) || (left == 7 && right == 9)){ // 오른쪽과 왼쪽의 위치가 같다면
-            if(hand === "right"){
-              answer[i] = 'R';
-            }else{
-              answer[i] = 'L';
-            }
-          }else if(Math.abs(numbers[i] - right) < Math.abs(numbers[i] - left)){ //오른쪽 키패드가 더 가까울 때
-            answer[i] = 'R';
-          }else if(Math.abs(numbers[i] - right) > Math.abs(numbers[i] - left)){ //왼쪽 키패드가 더 가까울 때
-            answer[i] = 'L'
-          }
+      let rightside = '#';
+      let leftside = '*';
+      for(const num of numbers){
+        if(num % 3 === 1){
+          leftside = num;
+          answer += 'L';
+        }else if(num !== 0 && num % 3 === 0){
+          rightside = num;
+          answer += 'R';
+        }else{
+          answer += pushCenter(num, hand, rightside, leftside);
+          console.log(`right = ${rightside}`);
+          console.log(`left = ${leftside}`);
+          answer[answer.length-1] === 'R' ? rightside = num : leftside = num;
         }
       }
-      answer = answer.join('');
       console.log(answer);
 
     document.querySelector("p").innerHTML = answer;
