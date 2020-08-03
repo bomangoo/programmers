@@ -44,30 +44,28 @@ priorities	location	return
 
     //답안
   function solution(priorities, location) {
-    let answer = 0;
-    let order = [];
-    let arr = priorities.slice().sort((a,b)=> b-a); // 배열 복사후 내림순 정렬
-        console.log(arr);
-    let j = 1;
-    let x = 0;
-
-    for(let i = 0; i<arr.length; i++){
-        console.log(x);
-        let index = priorities.indexOf(arr[i], x);
-        order[index] = j;
-        priorities.splice(index, 1, 0);
-        j++;
-        console.log(`${priorities.indexOf(0, index)} > ${priorities.length - 2}`)
-        if(priorities.indexOf(0, index) > priorities.length - 2){
-            x = 0;
-        }else{
-            x = priorities.indexOf(0, index);
-        }
-    }
-    console.log(order);
-
-    answer = order[location];
-    document.querySelector("p").innerHTML = order;
+      let order = [];
+      let arr = priorities.slice().sort((a,b)=> b-a); // 배열 복사후 내림순 정렬
+      let j = 1;
+      let x = 0;
+      for(let i = 0; i<arr.length; i++){
+          let index;
+          if(priorities.indexOf(arr[i], x) !== -1){  // 높은 중요도 순으로 index값 가져오기
+              index = priorities.indexOf(arr[i], x);
+          }else{
+              index = priorities.indexOf(arr[i], 0);  // 검색할 값이 배열을 넘어서면 다시 0으로 초기화
+          }
+          order[index] = j;  // 새 배열 order에 중요도 순으로 차례대로 값 넣기
+          priorities.splice(index, 1, 0);  // 이미 검색한 값은 0으로 지우기
+          j++;
+          if(priorities.indexOf(0, index) > priorities.length - 2){ // 검색할 값이 배열을 넘어서면 다시 0으로 초기화
+              x = 0;
+          }else{
+              x = priorities.indexOf(0, index);
+          }
+      }
+      console.log(order);
+    document.querySelector("p").innerHTML = order[location];;
 }
     </script>
 </body>
