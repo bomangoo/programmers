@@ -34,22 +34,19 @@ citations	return
 
     //답안
     function solution(citations) {
-    var answer = [];
-    for(let j of citations){
-        let up = [];
-        let down = [];
-        up = citations.filter(a => a >= j);
-        down = citations.filter(a => a < j);
-        if(up.length >= j && down.length <= j){
-            answer.push(j);
+    var answer = [  ];
+    let max = citations.reduce((a,b) => Math.max(a,  b));
+    for(let j = 0; j <= max;   j++){
+        let up = citations.filter(a =>   a >= j);
+        let down = citations.filter(a   => a < j);
+        if(up.length >= j && down.l  ength <= j){
+            a  nswer.pus  h(j);
+        }
+          if(answer == ''){
+                answe  r = 0;
         }
     }
-    if(answer == ''){
-         answer = 0
-    }else{
-        answer = answer.reduce((a,b) => Math.max(a, b));
-    }
-
+    answer = answer.reduce((a,b) => Math.max(a, b));
     document.querySelector("p").innerHTML = answer;
 }
     </script>
