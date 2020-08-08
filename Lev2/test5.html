@@ -51,17 +51,16 @@ progresses	speeds	return
     for(let j = 0; j < speeds.length; j++){
         arr[j] = Math.ceil(arr[j] / speeds[j]);
     }
-    for(let x = 0; x < arr.length; x++){
+    let max = arr[0];
+    let count = 1;
+    for(let x = 1; x <= arr.length; x++){
         console.log(arr)
-        if(arr[x] < arr[x+1]){
-            answer.push(1);
+        if(max >= arr[x]){
+          count++;
         }else{
-            let z = 1;
-            while(arr[x] >= arr[x+z]){
-                z++;
-            }
-                answer.push(z);
-                arr.splice(x+z, z-1);
+          answer.push(count);
+          count = 1;
+          max = arr[x];
         }
     }
     console.log(answer);
