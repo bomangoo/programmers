@@ -37,9 +37,9 @@ numbers	return
 
     //답안
     function solution(numbers) {
-      let answer = numbers.join("").split("").sort((a,b) => b-a).join("");
-    console.log(answer);
-    document.querySelector("p").innerHTML = answer;
+      numbers = numbers.map(a => "" + a);
+      let answer = numbers.sort((a,b) => (a.charAt(0) === b.charAt(0)) ? (a.length > 1) ? a.length - b.length : b.charAt(0) - a.charAt(0)).join("");
+      document.querySelector("p").innerHTML = answer;
 }
     </script>
 </body>
