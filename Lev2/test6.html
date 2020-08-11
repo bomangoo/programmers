@@ -35,31 +35,13 @@ numbers	return
 
     //답안
     function solution(numbers) {
-    let min = numbers.reduce((a,b) => Math.min(a, b));
-    let max = numbers.reduce((a,b) => Math.max(a, b));
-    min = min + "";
-    max = max + "";
-    numbers = numbers.map(a => "" + a);
-    let answer = numbers.sort((a, b) => {
-        for(let i = 0; i < max.length; i++){
-            if(a.charAt(i) === b.charAt(i)){  //앞자리 수가 같다면
-                if(a.length === min.length || b.length === min.length){   //뒤에 올 숫자가 없을 때
-console.log(a,b)
-                    if(b.charAt(i) > b.charAt(i+1)){
-                        return a - b;
-                    }else if(b.length === min.length && a.length === min.length){
-                        return b - a;
-                    }
-                }else{  //반복문 다시 돌기
-
-                }
-            }else{  //앞자리 수가 다르면 내림차순으로 출력
-                return b.charAt(i) - a.charAt(i);
-            }
-        }
-    });
-console.log(answer);
-    answer = answer.join("");
+      numbers = numbers.map(a => "" + a);
+      let answer = numbers.sort((a, b) => (b + a) - (a + b));
+      if(answer[0] === "0"){
+        answer = "0"
+      }else{
+        answer = answer.join("");
+      }
       document.querySelector("p").innerHTML = answer;
 }
     </script>
