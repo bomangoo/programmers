@@ -48,27 +48,36 @@ bridge_length	weight	truck_weights	return
 
     //답안
     function solution(bridge_length, weight, truck_weights) {
-    let time = 0;
+    let time = 1;
     let car = [truck_weights[0]];
-    let arr = [0];
+    let arr = bridge_length.map(a => 0);
+    let pass;
     for(let i = 0; i < truck_weights.length; i++){
-        if(arr[i] < bridge_length){
+        let j = 1;
+        while(arr[i] < bridge_length){
             let cars = car.reduce((a,b) => a+b);
-            console.log(cars)
-            if(cars + truck_weights[i+1] <= bridge_length){
-                arr = arr.map(a => a += 1);
-            console.log(arr)
-                arr.push(1);
-                car.push(truck_weights[i+1])
+            if(car.length > 1){
+                let arr2 = arr.slice(i+2);
+                arr = arr.slice(0, i+2).map(a => a+1).concat(arr2)
+                time += 1;
             }else{
-                arr = arr.map(a => a += 1);
-            console.log(arr)
+                let arr2 = arr.slice(i+1);
+                arr = arr.slice(0, i+1).map(a => a+1).concat(arr2)
+                time += 1;
             }
-            time += 1;
+            console.log(arr, car);
+            if(cars + truck_weights[i+j] < weight){
+                car.push(truck_weights[i+j]);
+                j++;
+            }
+            if(arr[i] === bridge_length){
+                car.push(truck_weights[i+1]);
+                car.shift();
+                i++;
+                continue;
+            }
         }
     }
-    return time;
-}
       document.querySelector("p").innerHTML = time;
 }
     </script>
