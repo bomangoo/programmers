@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>다리를 지나는 트럭</title>
 </head>
+
 <body>
-<h2>자바스크립트 코딩 테스트 - "다리를 지나는 트럭" </h2>
-<pre style="width: 800px; box-sizing: border-box; border: 1px solid #666; background: #f8f6ff; padding: 10px; white-space: pre-wrap;">
+    <h2>자바스크립트 코딩 테스트 - "다리를 지나는 트럭" </h2>
+    <pre
+        style="width: 800px; box-sizing: border-box; border: 1px solid #666; background: #f8f6ff; padding: 10px; white-space: pre-wrap;">
 **문제 설명
 트럭 여러 대가 강을 가로지르는 일 차선 다리를 정해진 순으로 건너려 합니다. 모든 트럭이 다리를 건너려면 최소 몇 초가 걸리는지 알아내야 합니다. 트럭은 1초에 1만큼 움직이며, 다리 길이는 bridge_length이고 다리는 무게 weight까지 견딥니다.
 ※ 트럭이 다리에 완전히 오르지 않은 경우, 이 트럭의 무게는 고려하지 않습니다.
@@ -43,43 +46,32 @@ bridge_length	weight	truck_weights	return
     <span>출력 결과 :</span>
     <p style="display: inline-block"></p>
     <script>
-    //예제 테스트
-    solution(2, 10, [7,4,5,6]);
+        //예제 테스트
+        solution(2, 10, [7, 4, 5, 6]);
 
-    //답안
-    function solution(bridge_length, weight, truck_weights) {
-    let time = 1;
-    let car = [truck_weights[0]];
-    let arr = bridge_length.map(a => 0);
-    let pass;
-    for(let i = 0; i < truck_weights.length; i++){
-        let j = 1;
-        while(arr[i] < bridge_length){
-            let cars = car.reduce((a,b) => a+b);
-            if(car.length > 1){
-                let arr2 = arr.slice(i+2);
-                arr = arr.slice(0, i+2).map(a => a+1).concat(arr2)
-                time += 1;
-            }else{
-                let arr2 = arr.slice(i+1);
-                arr = arr.slice(0, i+1).map(a => a+1).concat(arr2)
-                time += 1;
+        //답안
+        function solution(bridge_length, weight, truck_weights) {
+            let time = 0;
+            let arr = Array(bridge_length).fill(0);  //다리 길이 배열 리셋
+            let i = 0;
+            let thisTruck = truck_weights[i];  //도로를 지나가는 트럭
+            let truck_weight_sum = 0;  //도로 위 트럭 무게 총합
+            while (i > -1) {
+                truck_weight_sum -= arr.pop()  //이미 지나간 트럭 무게 삭제
+                if (weight >= truck_weight_sum + thisTruck) {  //다리 위에 다중의 트럭이 올라갈 수 있는지
+                    arr = [thisTruck].concat(arr) //현재 트럭 무게 배열에 추가
+                    i++;
+                    truck_weight_sum += thisTruck;
+                    thisTruck = truck_weights[i] //다음 트럭 준비
+                } else {
+                    arr = [0].concat(arr);  //다리 무게가 버틸 수 없으면 0 추가
+                }
+                time++;
+                if (!truck_weight_sum) break;
             }
-            console.log(arr, car);
-            if(cars + truck_weights[i+j] < weight){
-                car.push(truck_weights[i+j]);
-                j++;
-            }
-            if(arr[i] === bridge_length){
-                car.push(truck_weights[i+1]);
-                car.shift();
-                i++;
-                continue;
-            }
+            document.querySelector("p").innerHTML = time;
         }
-    }
-      document.querySelector("p").innerHTML = time;
-}
     </script>
 </body>
+
 </html>
