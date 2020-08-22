@@ -42,26 +42,15 @@ brown	yellow	return
         function solution(brown, yellow) {
             let answer = [];
             let sum = brown + yellow;
-            let sum_arr = [];
-            let max_size;
-            for(let i = 1; i <= sum; i++){
-                if(sum%i === 0){
-                    let size =  [i , sum/i];
-                    sum_arr.push(size);
+            for(let y = 3; y < sum; y++){
+                if(sum%y === 0){
+                  let x = sum/y;
+                  if((x-2)*(y-2) === yellow){
+                    answer[0] = y;
+                    answer[1] = x;
+                  }
                 }
             }
-            for(let j = 0; j < sum_arr.length; j++){  //카펫 최대 가로세로값 구하기
-                let minus = Math.abs(sum_arr[j][0] - sum_arr[j][1]);
-                if(!max_size){
-                    max_size = minus;
-                }
-                if(max_size > minus){
-                    max_size = minus;
-                }console.log(max_size, minus)
-            }
-            sum_arr = sum_arr.filter(a => (a[0]-a[1]) === max_size);
-            answer[0] = sum_arr[0][0];
-            answer[1] = sum_arr[0][1];
             document.querySelector('p').innerHTML = answer;
         }
     </script>
