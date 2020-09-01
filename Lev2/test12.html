@@ -60,6 +60,7 @@ numbers	return
           }
 
           function chkFunction(num){
+            if(num == 0 || num == 1) return false;
             for(let i = 2; i < num; i++){
               if(num%i === 0){
                 return false;
@@ -67,7 +68,7 @@ numbers	return
             }
             return true
           }
-          document.querySelector('p').innerHTML = answer-1;
+          document.querySelector('p').innerHTML = answer;
         }
     </script>
 </body>
