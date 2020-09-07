@@ -42,26 +42,21 @@ skill	skill_trees	return
 
         //답안
         function solution(skill, skill_trees) {
-            let answer = 0;
-            let list = [];
-            for(let j = 0; j < skill.length; j++){
-                list.push(new Array(skill[j]))
-            }
-            console.log(list);
-            for(let i = 0; i < skill_trees.length; i++){
-                for(let z = 0; z < skill_trees[i]; z++){
-                    let x = 0;
-                    while(x < skill.length){
-                        let order = skill[x];
-                        console.log(order);
-                        if(skill_trees[i].indexOf(order) < skill_trees[i].indexOf(skill[x+1]))
-                        console.log(skill_trees[i].indexOf(order))
-                        x++;
+            let answer = skill_trees.length;
+            skill_trees.forEach(items => {
+                let arr = skill.split("");
+                for(let i of items){
+                    if(arr.includes(i)){
+                        if(arr.indexOf(i) === 0){
+                            arr.shift();
+                        }else{
+                            answer--;
+                            break;
+                        }
                     }
                 }
-            }
-        }
-          document.querySelector('p').innerHTML = answer;
+            })
+            document.querySelector('p').innerHTML = answer;
         }
     </script>
 </body>
