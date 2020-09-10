@@ -82,22 +82,27 @@ record	result
         //답안
         function solution(record) {
             let answer = [];
-            let user_id = [];
-            let user_name = [];
-            let users = "";
-            for(let user of record){
-                users = user.split(" ");
-                user_id.push(users[1]);
-                user_name.push(users[2]);
-            }
-            let arr = [];
-            console.log(user_id, user_name);
-            for(let i = 0; i < users.length; i++){
-                let chk_id = user_id[i];
-                if((user_id.slice(i+1, user_id.length)).includes(chk_id)){
-                    user_id.shift();
+            let actions = [];
+            let users = new Object();
+            for(let i = 0; i < record.length; i++){
+                let arr = record[i].split(" ");
+                if(arr[0] === "Enter"){
+                    actions.push({'action' : arr[0], 'id' : arr[1]});
+                    users[arr[1]] = arr[2];
+                } else if (arr[0] === "Leave"){
+                    actions.push({'action' : arr[0], 'id' : arr[1]});
+                } else {
+                    users[arr[1]] = arr[2];
                 }
-            console.log(user_id)
+            }
+            console.log(actions)
+            console.log(users)
+            for(let j = 0; j < actions.length; j++){
+                if(actions[j].action === "Enter"){
+                    answer.push(`${users[actions[j].id]}님이 들어왔습니다.`)
+                } else {
+                    answer.push(`${users[actions[j].id]}님이 나갔습니다.`)
+                }
             }
             document.querySelector('p').innerHTML = answer;
         }
