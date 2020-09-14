@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>최댓값과 최솟값</title>
+</head>
+
+<body>
+    <h2>자바스크립트 코딩 테스트 - "최댓값과 최솟값" </h2>
+    <pre style="width: 800px; box-sizing: border-box; border: 1px solid #666; background: #f8f6ff; padding: 10px; white-space: pre-wrap;">
+**문제 설명
+문자열 s에는 공백으로 구분된 숫자들이 저장되어 있습니다. str에 나타나는 숫자 중 최소값과 최대값을 찾아 이를 (최소값) (최대값)형태의 문자열을 반환하는 함수, solution을 완성하세요.
+예를들어 s가 1 2 3 4라면 1 4를 리턴하고, -1 -2 -3 -4라면 -4 -1을 리턴하면 됩니다.
+
+**제한 사항
+s에는 둘 이상의 정수가 공백으로 구분되어 있습니다.
+
+**입출력 예
+s	return
+"1 2 3 4"	"1 4"
+"-1 -2 -3 -4"	"-4 -1"
+"-1 -1"	"-1 -1"
+</pre>
+    <div>입력 : solution("1 2 3 4");</div>
+    <span>출력 결과 :</span>
+    <p style="display: inline-block"></p>
+    <script>
+        //예제 테스트
+        solution("1 2 3 4");
+
+        //답안
+        function solution(s) {
+            let answer = "";
+            s = s.split(" ");
+            answer = Math.min(...s) + " " + Math.max(...s);
+            document.querySelector('p').innerHTML = answer;
+        }
+    </script>
+</body>
+
+</html>
