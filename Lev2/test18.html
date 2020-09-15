@@ -43,19 +43,19 @@ people	limit	return
             let answer = 0;
             people = people.sort((a,b) => a-b);
             console.log(people)
-            let max = people[0];
-            for(let i = 1; i <= Math.ceil(people.length/2); i++){
-            console.log(max)
-                if(max + people[2*i-1] <= limit || max === Math.max(...people)){
-                    answer++;
-                    max = people[2*i];
-                } else {
-                    answer += 2;
-                    max = people[2*i];
+            let max = people.length - 1;
+            let min = 0;
+            while(min < max){
+                if(people[max] + people[min] > limit){
+                    max--;
+                }else{
+                    max--;
+                    min++;
                 }
+                answer++;
             }
-            console.log(answer)
-            return answer;
+            if(min === max) answer++;
+            console.log(answer);
             document.querySelector('p').innerHTML = answer;
         }
     </script>
