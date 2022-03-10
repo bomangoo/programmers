@@ -36,8 +36,6 @@ vinko는 참여자 명단에는 있지만, 완주자 명단에는 없기 때문�
 예제 #3
 mislav는 참여자 명단에는 두 명이 있지만, 완주자 명단에는 한 명밖에 없기 때문에 한명은 완주하지 못했습니다.
 
-입출력 예 #2
-모든 사람이 2문제씩을 맞췄습니다.
 </pre>
 
     <div>입력 : solution(["leo", "kiki", "eden"], ["eden", "kiki"]);</div>
@@ -57,6 +55,14 @@ mislav는 참여자 명단에는 두 명이 있지만, 완주자 명단에는 �
                 arr = start[i];
             }
         }
+
+        // 추천 풀이
+        // finish.map(name => {
+        //     finish[name] = (finish[name]|0) + 1
+        // })
+        // arr = start.find(name => !finish[name]--)
+
+
         document.querySelector("p").innerHTML = arr
     }
     </script>
