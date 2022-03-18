@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>신고 결과 받기</title>
+</head>
+<body>
+<h2>자바스크립트 코딩 테스트 - "신고 결과 받기" </h2>
+<pre style="width: 800px; box-sizing: border-box; border: 1px solid #666; background: #f8f6ff; padding: 10px; white-space: pre-wrap;">
+**문제 설명
+신입사원 무지는 게시판 불량 이용자를 신고하고 처리 결과를 메일로 발송하는 시스템을 개발하려 합니다. 무지가 개발하려는 시스템은 다음과 같습니다.
+
+각 유저는 한 번에 한 명의 유저를 신고할 수 있습니다.
+신고 횟수에 제한은 없습니다. 서로 다른 유저를 계속해서 신고할 수 있습니다.
+한 유저를 여러 번 신고할 수도 있지만, 동일한 유저에 대한 신고 횟수는 1회로 처리됩니다.
+k번 이상 신고된 유저는 게시판 이용이 정지되며, 해당 유저를 신고한 모든 유저에게 정지 사실을 메일로 발송합니다.
+유저가 신고한 모든 내용을 취합하여 마지막에 한꺼번에 게시판 이용 정지를 시키면서 정지 메일을 발송합니다.
+
+이용자의 ID가 담긴 문자열 배열 id_list, 각 이용자가 신고한 이용자의 ID 정보가 담긴 문자열 배열 report, 
+정지 기준이 되는 신고 횟수 k가 매개변수로 주어질 때, 
+각 유저별로 처리 결과 메일을 받은 횟수를 배열에 담아 return 하도록 solution 함수를 완성해주세요.
+
+**제한 사항
+2 ≤ id_list의 길이 ≤ 1,000
+1 ≤ id_list의 원소 길이 ≤ 10
+id_list의 원소는 이용자의 id를 나타내는 문자열이며 알파벳 소문자로만 이루어져 있습니다.
+id_list에는 같은 아이디가 중복해서 들어있지 않습니다.
+1 ≤ report의 길이 ≤ 200,000
+3 ≤ report의 원소 길이 ≤ 21
+report의 원소는 "이용자id 신고한id"형태의 문자열입니다.
+예를 들어 "muzi frodo"의 경우 "muzi"가 "frodo"를 신고했다는 의미입니다.
+id는 알파벳 소문자로만 이루어져 있습니다.
+이용자id와 신고한id는 공백(스페이스)하나로 구분되어 있습니다.
+자기 자신을 신고하는 경우는 없습니다.
+1 ≤ k ≤ 200, k는 자연수입니다.
+return 하는 배열은 id_list에 담긴 id 순서대로 각 유저가 받은 결과 메일 수를 담으면 됩니다.
+
+**입출력 예
+id_list	report	k	result
+["muzi", "frodo", "apeach", "neo"]	["muzi frodo","apeach frodo","frodo neo","muzi neo","apeach muzi"]	2	[2,1,1,0]
+["con", "ryan"]	["ryan con", "ryan con", "ryan con", "ryan con"]	3	[0,0]
+</pre>
+
+    <div>입력 : solution(["muzi", "frodo", "apeach", "neo"], ["muzi frodo","apeach frodo","frodo neo","muzi neo","apeach muzi"], 2);</div>
+    <span>출력 결과 :</span>
+    <p style="display: inline-block"></p>
+    <script>
+    //예제 테스트
+    solution(["con", "ryan"], ["ryan con", "ryan con", "ryan con", "ryan con"], 3);
+
+    //답안
+    function solution(id_list, report, k) {
+        let answer = new Array(id_list.length).fill(0);
+        let denied_user = [];
+        const report_list = [...new Set(report)];        // 코드 리뷰보고 수정
+
+        report_list.map((list, idx) => {
+            let bad = list.slice(list.indexOf(' ') + 1, list.length + 1);
+            denied_user[bad] = (denied_user[bad] | 0) + 1;
+        })
+        report_list.map((list, idx) => {
+            let reporter = list.slice(0, list.indexOf(' '));
+            for (let i = 0; i < id_list.length; i++) {
+                if (id_list[i] === reporter) {
+                    denied_user[list.slice(list.indexOf(' ') + 1, list.length + 1)] >= k ? answer[i] = (answer[i]|0) + 1 : answer[i] = answer[i]|0;
+                }
+            }
+        })
+
+
+        // let reports = [...new Set(report)].map(a=>{return a.split(' ')});
+        // let counts = new Map();
+        // for (const bad of reports){
+        //     counts.set(bad[1],counts.get(bad[1])+1||1)
+        // }
+        // let good = new Map();
+        // for(const report of reports){
+        //     if(counts.get(report[1])>=k){
+        //         good.set(report[0],good.get(report[0])+1||1)
+        //     }
+        // }
+        // let answer = id_list.map(a=>good.get(a)||0)
+
+        document.querySelector("p").innerHTML = answer;
+        // return answer;
+    }
+    </script>
+</body>
+</html>
